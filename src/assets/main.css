@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+:root {
+    --lc-inspector-main: #42d392;
+    --lc-inspector-glow: rgba(0, 220, 130, 0.6);
+    --lc-inspector-fill: rgba(66, 211, 146, 0.12);
+}
