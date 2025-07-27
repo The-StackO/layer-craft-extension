@@ -3,15 +3,24 @@ const props = defineProps<{
   isInspecting: boolean;
 }>();
 
+const emits = defineEmits<{
+  (e: 'update:isInspecting', value: boolean): void;
+  (e: 'select', value: HTMLElement): void;
+}>();
+
 const highlightRef = ref<HTMLElement>();
+const isSelecting = ref(false);
 
 const handleMouseMove = (e: MouseEvent) => {
+  if (!isSelecting.value) {
+    return;
+  }
+
   e.preventDefault();
   e.stopPropagation();
 
   const target = e.target as HTMLElement;
   const { top, left, width, height } = target.getBoundingClientRect();
-  console.log(top, left, width, height);
   if (highlightRef.value) {
     highlightRef.value.style.transform = `translate(${left}px, ${top}px)`;
     highlightRef.value.style.width = `${width}px`;
@@ -19,13 +28,36 @@ const handleMouseMove = (e: MouseEvent) => {
   }
 };
 
+const handleClick = (e: MouseEvent) => {
+  if (!isSelecting.value) {
+    return;
+  }
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  const target = e.target as HTMLElement;
+  if (target) {
+    isSelecting.value = false;
+
+    window.removeEventListener('mousemove', handleMouseMove, true);
+    window.removeEventListener('click', handleClick, true);
+
+    emits('select', target);
+  }
+};
+
 watch(
   () => props.isInspecting,
   value => {
+    isSelecting.value = value;
+
     if (value) {
       window.addEventListener('mousemove', handleMouseMove, true);
+      window.addEventListener('click', handleClick, true);
     } else {
       window.removeEventListener('mousemove', handleMouseMove, true);
+      window.removeEventListener('click', handleClick, true);
     }
   }
 );
