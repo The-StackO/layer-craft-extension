@@ -25,6 +25,14 @@ const updateHighlightPosition = (target: HTMLElement) => {
   }
 };
 
+const resetHighlightPosition = () => {
+  if (highlightRef.value) {
+    highlightRef.value.style.transform = 'translate(0, 0)';
+    highlightRef.value.style.width = '0';
+    highlightRef.value.style.height = '0';
+  }
+};
+
 const handleMouseMove = (e: MouseEvent) => {
   if (!isSelecting.value) {
     return;
@@ -85,6 +93,7 @@ watch(
     } else {
       removeEventListeners();
       lastTarget = null;
+      resetHighlightPosition();
     }
   }
 );

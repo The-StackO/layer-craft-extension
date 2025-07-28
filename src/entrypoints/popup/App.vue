@@ -16,7 +16,7 @@ import ThemeSwitch from './components/ThemeSwitch.vue';
 
 const theme = ref<GlobalTheme | null>(null);
 onMounted(async () => {
-  await storage.watch<string>('local:theme', newTheme => {
+  storage.watch<string>('local:theme', newTheme => {
     theme.value = newTheme === 'dark' ? darkTheme : null;
   });
 });
@@ -33,7 +33,22 @@ const historyItems = ref<HistoryItem[]>([
  */
 function handleSelectElement() {
   console.log('开始选择元素...');
-  // TODO: 实现与 content-script 的通信
+  // 发送消息给当前标签页的 content script
+  browser.tabs.query({ active: true, currentWindow: true }, tabs => {
+    const currentTab = tabs[0];
+    if (currentTab?.id) {
+      browser.tabs
+        .sendMessage(currentTab.id, {
+          type: 'startSelection',
+          data: {
+            mode: 'select',
+          },
+        })
+        .catch(error => {
+          console.error('Failed to send message to content script:', error);
+        });
+    }
+  });
 }
 
 /**

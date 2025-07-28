@@ -10,13 +10,26 @@ const handleInspectorSelect = (target: HTMLElement) => {
     selectedElement.value = target;
   }
 };
+
+const handlePanelClose = () => {
+  isInspecting.value = false;
+  selectedElement.value = null;
+};
+
+onMounted(() => {
+  browser.runtime.onMessage.addListener((message, _, sendResponse) => {
+    console.log('Content script received message:', message);
+    isInspecting.value = true;
+    sendResponse(Math.random());
+    return true;
+  });
+});
 </script>
 
 <template>
   <div class="layer-craft-ext absolute z-9999 left-0 top-0">
-    <button class="color-red" @click="isInspecting = !isInspecting">开始</button>
     <CursorInspector v-model:is-inspecting="isInspecting" @select="handleInspectorSelect" />
-    <LayerPanel :target="selectedElement" />
+    <LayerPanel :target="selectedElement" @close="handlePanelClose" />
   </div>
 </template>
 

@@ -7,6 +7,10 @@ const props = defineProps<{
   target: HTMLElement | null;
 }>();
 
+const emits = defineEmits<{
+  (e: 'close'): void;
+}>();
+
 const currentTarget = ref<HTMLElement | null>(props.target);
 const panelRef = ref();
 const showPanel = ref(false);
@@ -54,7 +58,7 @@ watch([x, y, width, height], () => {
       <template #trigger>
         <div style="position: fixed; width: 0; height: 0"></div>
       </template>
-      <TextReplacePanel :target="target" @cancel="" />
+      <TextReplacePanel :target="target" @close="emits('close')" />
     </n-popover>
   </div>
 </template>

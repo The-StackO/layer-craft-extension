@@ -9,13 +9,13 @@ const originalText = computed(() => props.target?.textContent?.trim());
 const replacedText = ref('');
 
 const emits = defineEmits<{
-  (e: 'cancel'): void;
+  (e: 'close'): void;
 }>();
 
 const onConfirm = () => {
   if (props.target && replacedText.value) {
     props.target.textContent = replacedText.value;
-    emits('cancel');
+    emits('close');
   }
 };
 </script>
@@ -34,7 +34,7 @@ const onConfirm = () => {
       </n-form>
     </div>
     <div class="panel-footer flex justify-end gap-2">
-      <n-button size="small" @click="$emit('cancel')">取消</n-button>
+      <n-button size="small" @click="emits('close')">取消</n-button>
       <n-button size="small" type="primary" @click="onConfirm">确定</n-button>
     </div>
   </div>
