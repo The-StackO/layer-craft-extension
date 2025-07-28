@@ -1,5 +1,6 @@
 import '@/assets/main.css';
 import './style.css';
+import 'naive-ui/';
 import { createVueApp } from './main';
 
 export default defineContentScript({

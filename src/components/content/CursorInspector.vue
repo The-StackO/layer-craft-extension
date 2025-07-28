@@ -73,11 +73,9 @@ watch(
 @reference "@/assets/main.css";
 
 .inspector__highlight {
-  @apply fixed top-0 left-0 z-[2147483647] pointer-events-none transition-all duration-150 ease-linear;
+  @apply fixed top-0 left-0 z-[2147483647] pointer-events-none rounded-xs transition-all duration-150 ease-linear;
 
   background: var(--lc-inspector-fill);
-  border: 1px solid var(--lc-inspector-main);
-  border-radius: 4px;
   box-shadow:
     0 0 0 1px var(--lc-inspector-main),
     0 0 3px var(--lc-inspector-glow);
