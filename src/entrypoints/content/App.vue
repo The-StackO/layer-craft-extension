@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CursorInspector from '@/components/content/CursorInspector.vue';
-import LayerPanel from '@/components/content/LayerPanel.vue';
+import CursorInspector from './components/CursorInspector.vue';
+import LayerPanel from './components/LayerPanel.vue';
 
 const isInspecting = ref(false);
 const selectedElement = ref<HTMLElement | null>(null);
@@ -13,7 +13,7 @@ const handleInspectorSelect = (target: HTMLElement) => {
 </script>
 
 <template>
-  <div id="layer-craft-ext" class="layer-craft-ext absolute z-9999 left-0 top-0">
+  <div class="layer-craft-ext absolute z-9999 left-0 top-0">
     <button class="color-red" @click="isInspecting = !isInspecting">开始</button>
     <CursorInspector v-model:is-inspecting="isInspecting" @select="handleInspectorSelect" />
     <LayerPanel :target="selectedElement" />

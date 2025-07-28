@@ -1,6 +1,5 @@
 import '@/assets/main.css';
 import './style.css';
-import 'naive-ui/';
 import { createVueApp } from './main';
 
 export default defineContentScript({
@@ -9,7 +8,7 @@ export default defineContentScript({
 
   async main(ctx) {
     const ui = await createShadowRootUi(ctx, {
-      name: 'layer-craft-root',
+      name: 'layer-craft-ext',
       position: 'inline',
       anchor: 'body',
       onMount: container => {
