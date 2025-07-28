@@ -12,13 +12,12 @@ export const setupNaiveStyles = (container: HTMLElement) => {
       if (!text) return false;
 
       // 检查是否包含 NaiveUI 的特征
-      const isNaive =
+      return (
         text.includes('cssr-id="n-') ||
         text.includes('naive-ui') ||
         text.includes('.n-') ||
-        !!text.match(/cssr-id="(n-[^"]+)"/);
-
-      return isNaive;
+        !!text.match(/cssr-id="(n-[^"]+)"/)
+      );
     };
 
     // 完整复制样式标签（包括属性）

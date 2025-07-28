@@ -13,9 +13,9 @@ const handleInspectorSelect = (target: HTMLElement) => {
 </script>
 
 <template>
-  <div id="layer-craft-panel" class="layer-craft-panel absolute z-9999 left-0 top-0">
+  <div id="layer-craft-ext" class="layer-craft-ext absolute z-9999 left-0 top-0">
     <button class="color-red" @click="isInspecting = !isInspecting">开始</button>
-    <CursorInspector :is-inspecting="isInspecting" @select="handleInspectorSelect" />
+    <CursorInspector v-model:is-inspecting="isInspecting" @select="handleInspectorSelect" />
     <LayerPanel :target="selectedElement" />
   </div>
 </template>

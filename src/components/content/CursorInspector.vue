@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue';
+
 const props = defineProps<{
   isInspecting: boolean;
 }>();
@@ -10,6 +12,18 @@ const emits = defineEmits<{
 
 const highlightRef = ref<HTMLElement>();
 const isSelecting = ref(false);
+let lastTarget: HTMLElement | null = null;
+
+const updateHighlightPosition = (target: HTMLElement) => {
+  const { top, left, width, height } = target.getBoundingClientRect();
+  if (highlightRef.value) {
+    const scrollTop = window.scrollY;
+    const scrollLeft = window.scrollX;
+    highlightRef.value.style.transform = `translate(${left + scrollLeft}px, ${top + scrollTop}px)`;
+    highlightRef.value.style.width = `${width}px`;
+    highlightRef.value.style.height = `${height}px`;
+  }
+};
 
 const handleMouseMove = (e: MouseEvent) => {
   if (!isSelecting.value) {
@@ -20,12 +34,8 @@ const handleMouseMove = (e: MouseEvent) => {
   e.stopPropagation();
 
   const target = e.target as HTMLElement;
-  const { top, left, width, height } = target.getBoundingClientRect();
-  if (highlightRef.value) {
-    highlightRef.value.style.transform = `translate(${left}px, ${top}px)`;
-    highlightRef.value.style.width = `${width}px`;
-    highlightRef.value.style.height = `${height}px`;
-  }
+  lastTarget = target;
+  updateHighlightPosition(target);
 };
 
 const handleClick = (e: MouseEvent) => {
@@ -40,11 +50,29 @@ const handleClick = (e: MouseEvent) => {
   if (target) {
     isSelecting.value = false;
 
-    window.removeEventListener('mousemove', handleMouseMove, true);
-    window.removeEventListener('click', handleClick, true);
+    removeEventListeners();
 
     emits('select', target);
   }
+};
+
+const handleScroll = () => {
+  if (!isSelecting.value || !lastTarget) {
+    return;
+  }
+  updateHighlightPosition(lastTarget);
+};
+
+const addEventListeners = () => {
+  window.addEventListener('mousemove', handleMouseMove, true);
+  window.addEventListener('click', handleClick, true);
+  window.addEventListener('scroll', handleScroll, true);
+};
+
+const removeEventListeners = () => {
+  window.removeEventListener('mousemove', handleMouseMove, true);
+  window.removeEventListener('click', handleClick, true);
+  window.removeEventListener('scroll', handleScroll, true);
 };
 
 watch(
@@ -53,11 +81,10 @@ watch(
     isSelecting.value = value;
 
     if (value) {
-      window.addEventListener('mousemove', handleMouseMove, true);
-      window.addEventListener('click', handleClick, true);
+      addEventListeners();
     } else {
-      window.removeEventListener('mousemove', handleMouseMove, true);
-      window.removeEventListener('click', handleClick, true);
+      removeEventListeners();
+      lastTarget = null;
     }
   }
 );
@@ -73,7 +100,7 @@ watch(
 @reference "@/assets/main.css";
 
 .inspector__highlight {
-  @apply fixed top-0 left-0 z-[2147483647] pointer-events-none rounded-xs transition-all duration-150 ease-linear;
+  @apply absolute top-0 left-0 z-[2147483646] pointer-events-none rounded-xs transition-all duration-150 ease-linear;
 
   background: var(--lc-inspector-fill);
   box-shadow:

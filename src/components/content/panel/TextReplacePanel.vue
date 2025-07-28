@@ -13,7 +13,7 @@ const emits = defineEmits<{
 }>();
 
 const onConfirm = () => {
-  if (props.target) {
+  if (props.target && replacedText.value) {
     props.target.textContent = replacedText.value;
     emits('cancel');
   }
