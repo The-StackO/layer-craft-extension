@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { NButton, NDivider } from 'naive-ui';
 import HistoryList from '@/entrypoints/popup/components/HistoryList.vue';
 import { sendMessage } from '@/services/messging';
@@ -7,6 +8,7 @@ import { getProxiedHistoryService } from '@/services/history/proxy';
 import { getActiveTab } from '@/utils/tabs';
 
 // 操作历史的模拟数据
+const contentScriptInjected = ref(false);
 const historyItems = ref<HistoryItem[]>([]);
 
 /**
@@ -38,6 +40,7 @@ const handleHistoryUndo = async (history: HistoryItem) => {
 onMounted(async () => {
   const activeTab = await getActiveTab();
   if (activeTab && activeTab.url) {
+    contentScriptInjected.value = await sendMessage('ping', {}, activeTab.id);
     historyItems.value = await getProxiedHistoryService().getHistoryByUrl(activeTab.url);
   }
 });
@@ -46,12 +49,21 @@ onMounted(async () => {
 <template>
   <div class="w-full h-full">
     <div class="flex-shrink-0 mb-6 p-5 rounded-xl shadow-sm transition-all duration-300">
-      <p class="text-sm text-gray-500 dark:text-gray-400 mb-5 text-center leading-relaxed">
+      <p class="text-sm text-gray-500 mb-5 text-center leading-relaxed">
         点击下方按钮，在页面上选择元素进行修改
       </p>
-      <n-button type="primary" size="large" @click="handleSelectElement" block>
+      <n-button
+        type="primary"
+        size="large"
+        @click="handleSelectElement"
+        block
+        :disabled="!contentScriptInjected"
+      >
         选择页面元素
       </n-button>
+      <p class="text-xs text-amber-500 mt-3" v-if="!contentScriptInjected">
+        无法操作当前页面的元素，可能是由于新标签页或浏览器特权页面等
+      </p>
     </div>
 
     <n-divider class="!my-4 flex-shrink-0">

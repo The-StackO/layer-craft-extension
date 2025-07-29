@@ -21,6 +21,10 @@ const handlePanelClose = () => {
 };
 
 onMounted(() => {
+  onMessage('ping', message => {
+    return true;
+  });
+
   getProxiedHistoryService()
     .getHistoryByUrl(getCurrentLocation())
     .then(historyItems => {

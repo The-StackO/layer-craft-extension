@@ -9,6 +9,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
   }),
   manifest: {
+    name: '层舟-网页修改',
+    description: '层舟-网页修改',
     permissions: ['storage'],
   },
 });

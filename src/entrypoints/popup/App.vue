@@ -13,13 +13,13 @@ import PopupMain from './components/PopupMain.vue';
       </n-layout-header>
       <n-layout-content
         position="absolute"
-        class="!top-[52px] !bottom-[22px]"
+        class="!top-[52px] !bottom-[26px]"
         :native-scrollbar="false"
         content-style="padding: 16px;"
       >
         <PopupMain />
       </n-layout-content>
-      <n-layout-footer bordered position="absolute" class="h-[22px] p-0">
+      <n-layout-footer bordered position="absolute" class="h-[26px] p-0">
         <PopupFooter />
       </n-layout-footer>
     </n-layout>
