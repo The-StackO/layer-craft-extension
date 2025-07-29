@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
     --lc-inspector-main: #42d392;
     --lc-inspector-glow: rgba(0, 220, 130, 0.6);
