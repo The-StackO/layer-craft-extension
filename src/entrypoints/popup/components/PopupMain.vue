@@ -10,7 +10,7 @@ import { getActiveTab } from '@/utils/tabs';
 const historyItems = ref<HistoryItem[]>([]);
 
 /**
- * 处理“选择元素”按钮的点击事件
+ * 处理"选择元素"按钮的点击事件
  */
 const handleSelectElement = async () => {
   const activeTab = await getActiveTab();
@@ -31,6 +31,7 @@ const handleHistoryUndo = async (history: HistoryItem) => {
     };
     await sendMessage('makeUndo', undoMessage, activeTab.id);
     await getProxiedHistoryService().deleteHistoryItem(history.id);
+    historyItems.value = historyItems.value.filter(item => item.id !== history.id);
   }
 };
 
@@ -44,16 +45,22 @@ onMounted(async () => {
 
 <template>
   <div class="w-full h-full">
-    <div class="flex-shrink-0 mb-6">
-      <p class="text-sm text-gray-400 mb-3 text-center">点击下方按钮，在页面上选择元素进行修改</p>
+    <div class="flex-shrink-0 mb-6 p-5 rounded-xl shadow-sm transition-all duration-300">
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-5 text-center leading-relaxed">
+        点击下方按钮，在页面上选择元素进行修改
+      </p>
       <n-button type="primary" size="large" @click="handleSelectElement" block>
         选择页面元素
       </n-button>
     </div>
 
-    <n-divider class="!my-1 flex-shrink-0" />
+    <n-divider class="!my-4 flex-shrink-0">
+      <span class="text-xs text-gray-400 px-3 py-1 rounded-full">历史记录</span>
+    </n-divider>
 
-    <HistoryList :items="historyItems" @undo="handleHistoryUndo" />
+    <div class="flex-grow overflow-hidden">
+      <HistoryList :items="historyItems" @undo="handleHistoryUndo" />
+    </div>
   </div>
 </template>
 
