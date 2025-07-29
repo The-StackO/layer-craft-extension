@@ -13,6 +13,8 @@ import { darkTheme } from 'naive-ui';
 import type { GlobalTheme } from 'naive-ui';
 import HistoryList, { type HistoryItem } from './components/HistoryList.vue';
 import ThemeSwitch from './components/ThemeSwitch.vue';
+import { sendMessage } from '@/services/messging';
+import { getActiveTab } from '@/utils/tabs';
 
 const theme = ref<GlobalTheme | null>(null);
 onMounted(async () => {
@@ -31,25 +33,14 @@ const historyItems = ref<HistoryItem[]>([
 /**
  * 处理“选择元素”按钮的点击事件
  */
-function handleSelectElement() {
-  console.log('开始选择元素...');
+const handleSelectElement = async () => {
   // 发送消息给当前标签页的 content script
-  browser.tabs.query({ active: true, currentWindow: true }, tabs => {
-    const currentTab = tabs[0];
-    if (currentTab?.id) {
-      browser.tabs
-        .sendMessage(currentTab.id, {
-          type: 'startSelection',
-          data: {
-            mode: 'select',
-          },
-        })
-        .catch(error => {
-          console.error('Failed to send message to content script:', error);
-        });
-    }
-  });
-}
+  const activeTab = await getActiveTab();
+  if (activeTab) {
+    await sendMessage('selection', { type: 'start' }, activeTab.id);
+    window.close();
+  }
+};
 
 /**
  * 处理来自 HistoryList 的撤销事件

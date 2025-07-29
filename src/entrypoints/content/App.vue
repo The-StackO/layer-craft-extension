@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CursorInspector from './components/CursorInspector.vue';
 import LayerPanel from './components/LayerPanel.vue';
+import { onMessage } from '@/services/messging';
 
 const isInspecting = ref(false);
 const selectedElement = ref<HTMLElement | null>(null);
@@ -17,10 +18,8 @@ const handlePanelClose = () => {
 };
 
 onMounted(() => {
-  browser.runtime.onMessage.addListener((message, _, sendResponse) => {
-    console.log('Content script received message:', message);
-    isInspecting.value = true;
-    sendResponse(Math.random());
+  onMessage('selection', message => {
+    isInspecting.value = message.data.type === 'start';
     return true;
   });
 });
