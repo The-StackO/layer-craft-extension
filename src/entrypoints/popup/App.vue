@@ -11,24 +11,27 @@ import {
 } from 'naive-ui';
 import { darkTheme } from 'naive-ui';
 import type { GlobalTheme } from 'naive-ui';
-import HistoryList, { type HistoryItem } from './components/HistoryList.vue';
+import HistoryList from './components/HistoryList.vue';
 import ThemeSwitch from './components/ThemeSwitch.vue';
 import { sendMessage } from '@/services/messging';
 import { getActiveTab } from '@/utils/tabs';
+import { getProxiedHistoryService } from '@/services/history/proxy';
+import type { HistoryItem } from '@/services/history/types';
 
 const theme = ref<GlobalTheme | null>(null);
 onMounted(async () => {
   storage.watch<string>('local:theme', newTheme => {
     theme.value = newTheme === 'dark' ? darkTheme : null;
   });
+
+  const activeTab = await getActiveTab();
+  if (activeTab && activeTab.url) {
+    historyItems.value = await getProxiedHistoryService().getHistoryByUrl(activeTab.url);
+  }
 });
 
 // 操作历史的模拟数据
-const historyItems = ref<HistoryItem[]>([
-  { id: 3, type: '文本替换', target: '页面主标题' },
-  { id: 2, type: '样式修改', target: 'ID 为 "buy-button" 的按钮' },
-  { id: 1, type: '删除元素', target: '类名为 "ad-banner" 的图片' },
-]);
+const historyItems = ref<HistoryItem[]>([]);
 
 /**
  * 处理“选择元素”按钮的点击事件
@@ -42,16 +45,19 @@ const handleSelectElement = async () => {
   }
 };
 
-/**
- * 处理来自 HistoryList 的撤销事件
- * @param {number} id - 要撤销的操作ID
- */
-function handleUndo(id: number) {
-  console.log(`请求撤销操作 ID: ${id}`);
-  // 演示：从列表中移除该项
-  historyItems.value = historyItems.value.filter(item => item.id !== id);
-  // TODO: 在此实现真正的撤销逻辑
-}
+const handleHistoryUndo = async (history: HistoryItem) => {
+  const activeTab = await getActiveTab();
+  if (activeTab) {
+    const undoMessage = {
+      type: history.type,
+      xpath: history.xpath,
+      before: history.before,
+      after: history.after,
+    };
+    await sendMessage('makeUndo', undoMessage, activeTab.id);
+    await getProxiedHistoryService().deleteHistoryItem(history.id);
+  }
+};
 </script>
 
 <template>
@@ -66,7 +72,10 @@ function handleUndo(id: number) {
         </div>
       </n-layout-header>
 
-      <n-layout-content class="flex-grow p-4 flex flex-col gap-y-4 overflow-y-auto">
+      <n-layout-content
+        class="flex-grow p-4 flex flex-col gap-y-4 overflow-y-auto"
+        :native-scrollbar="false"
+      >
         <div class="flex-shrink-0 mb-6">
           <p class="text-sm text-gray-400 mb-3 text-center">
             点击下方按钮，在页面上选择元素进行修改
@@ -78,7 +87,7 @@ function handleUndo(id: number) {
 
         <n-divider class="!my-1 flex-shrink-0" />
 
-        <HistoryList :items="historyItems" @undo="handleUndo" />
+        <HistoryList :items="historyItems" @undo="handleHistoryUndo" />
       </n-layout-content>
 
       <n-layout-footer class="flex-shrink-0 py-2 px-4 text-center border-t border-gray-700/60">

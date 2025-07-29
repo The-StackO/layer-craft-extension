@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue';
 import { NButton, NForm, NFormItem, NInput } from 'naive-ui';
+import { getProxiedHistoryService } from '@/services/history/proxy';
+import { getXpathForElement } from '@/utils/dom';
+import { getCurrentLocation } from '@/utils/url';
 
 const props = defineProps<{
   target: HTMLElement | null;
@@ -12,9 +16,18 @@ const emits = defineEmits<{
   (e: 'close'): void;
 }>();
 
-const onConfirm = () => {
+const onConfirm = async () => {
   if (props.target && replacedText.value) {
     props.target.textContent = replacedText.value;
+
+    await getProxiedHistoryService().addHistoryItem({
+      type: 'text_replace',
+      url: getCurrentLocation(),
+      xpath: getXpathForElement(props.target),
+      before: originalText.value || '',
+      after: replacedText.value,
+    });
+
     emits('close');
   }
 };
