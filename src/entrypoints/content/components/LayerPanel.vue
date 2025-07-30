@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { NPopover } from 'naive-ui';
-import TextReplacePanel from './panel/TextReplacePanel.vue';
 import { useElementBounding } from '@vueuse/core';
+import GuidePanel from './panel/GuidePanel.vue';
+import TextReplacePanel from './panel/TextReplacePanel.vue';
 
 const props = defineProps<{
   target: HTMLElement | null;
@@ -24,6 +25,12 @@ const updatePanelPosition = () => {
     panelX.value = left.value + width.value / 2;
     panelY.value = top.value + height.value;
   }
+};
+
+const openedPanel = ref('guide');
+
+const handlePanelSelect = (panel: string) => {
+  openedPanel.value = panel;
 };
 
 watch(
@@ -59,7 +66,16 @@ watch([x, y, width, height], () => {
       <template #trigger>
         <div style="position: fixed; width: 0; height: 0"></div>
       </template>
-      <TextReplacePanel :target="target" @close="emits('close')" />
+      <GuidePanel
+        v-if="openedPanel === 'guide'"
+        @panel-select="handlePanelSelect"
+        @close="emits('close')"
+      />
+      <TextReplacePanel
+        v-else-if="openedPanel === 'text_replace'"
+        :target="target"
+        @close="emits('close')"
+      />
     </n-popover>
   </div>
 </template>
@@ -69,5 +85,9 @@ watch([x, y, width, height], () => {
 
 .layer-craft-panel {
   @apply absolute top-0 left-0;
+}
+
+.layer-craft-panel :deep(.n-popover) {
+  padding: 0 !important;
 }
 </style>

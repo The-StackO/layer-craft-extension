@@ -34,7 +34,7 @@ const onConfirm = async () => {
 </script>
 
 <template>
-  <div class="panel__text-replace space-y-2">
+  <div class="panel__text-replace space-y-2 py-2 px-4">
     <div class="panel-header flex justify-center font-bold">文本替换</div>
     <div class="panel-body">
       <n-form size="small">

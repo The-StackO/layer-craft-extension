@@ -1,4 +1,5 @@
 import { defineExtensionMessaging } from '@webext-core/messaging';
+import type { HistoryItem } from '@/services/history/types';
 
 interface ProtocolMap {
   ping({}): boolean;
@@ -11,7 +12,7 @@ interface ProtocolMap {
     before,
     after,
   }: {
-    type: 'text_replace' | 'style_modify';
+    type: HistoryItem['type'];
     xpath: string;
     before: string;
     after: string;
