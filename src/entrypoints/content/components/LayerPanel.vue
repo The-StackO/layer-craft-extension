@@ -54,6 +54,7 @@ watch([x, y, width, height], () => {
       trigger="manual"
       :z-index="2147483647"
       :to="panelRef?.$el || panelRef"
+      @clickoutside="emits('close')"
     >
       <template #trigger>
         <div style="position: fixed; width: 0; height: 0"></div>

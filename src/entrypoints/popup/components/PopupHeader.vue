@@ -1,11 +1,25 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { NIcon } from 'naive-ui';
+import { LogoGithub } from '@vicons/ionicons5';
+
+const handleOpenGithub = async () => {
+  await browser.tabs.create({ url: 'https://github.com/The-StackO/layer-craft-extension' });
+};
+</script>
 
 <template>
   <div class="w-full h-full flex items-center justify-between px-4 py-3">
     <div class="flex items-center">
-      <h1 class="text-sm font-bold">层舟-网页修改</h1>
+      <h1 class="text-sm font-bold">层舟-网页魔术贴</h1>
     </div>
-    <div class="flex-shrink-0 p-1"></div>
+    <div class="flex-shrink-0 p-1">
+      <span
+        class="flex items-center justify-center cursor-pointer text-gray-500 hover:text-gray-700 transition-all duration-200"
+        @click="handleOpenGithub"
+      >
+        <n-icon :component="LogoGithub" :size="18" />
+      </span>
+    </div>
   </div>
 </template>
 
