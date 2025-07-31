@@ -65,6 +65,7 @@ watch([x, y, width, height], () => {
       trigger="manual"
       :z-index="2147483647"
       :to="panelRef?.$el || panelRef"
+      placement="bottom"
       @clickoutside="emits('close')"
       :class="{
         '!p-0': openedPanel === 'guide',
