@@ -24,7 +24,7 @@ onMounted(() => {
   getProxiedHistoryService()
     .getHistoryByUrl(getCurrentLocation())
     .then(historyItems => {
-      historyItems.forEach(history => {
+      historyItems.reverse().forEach(history => {
         if (history.type === 'text_replace') {
           const element = getElementByXpath(history.xpath);
           if (element) {

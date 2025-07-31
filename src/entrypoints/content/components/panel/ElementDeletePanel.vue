@@ -31,10 +31,10 @@ const onConfirm = async () => {
 </script>
 
 <template>
-  <div class="panel__element-delete space-y-2">
+  <div class="panel__element-delete space-y-2 w-70">
     <div class="panel-header flex justify-center font-bold">删除元素</div>
     <div class="panel-body">
-      <p>是否删除当前选中的元素？</p>
+      <p class="text-amber-500 text-center">是否删除当前选中的元素？</p>
     </div>
     <div class="panel-footer flex justify-end gap-2">
       <n-button size="small" @click="emits('close')">取消</n-button>
