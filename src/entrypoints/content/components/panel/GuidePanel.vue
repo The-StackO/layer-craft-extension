@@ -1,22 +1,38 @@
 <script setup lang="ts">
+import logo from '@/assets/logo.svg';
+import type { ChangeType } from '@/services/history/types';
+
 const emits = defineEmits<{
-  (e: 'panelSelect', s: 'text_replace' | 'element_delete' | 'image_replace'): void;
+  (e: 'selectCommand', s: ChangeType): void;
   (e: 'close'): void;
 }>();
+
+const btnList: { text: string; type: ChangeType }[] = [
+  { text: '文本替换', type: 'text_replace' },
+  { text: '删除元素', type: 'element_delete' },
+  { text: '图片替换', type: 'image_replace' },
+];
 </script>
 
 <template>
   <div class="panel__guide">
     <div class="guide-layer">
-      <button class="guide-btn" @click="emits('panelSelect', 'text_replace')">
-        <span class="btn-text">文本替换</span>
-      </button>
-      <button class="guide-btn" @click="emits('panelSelect', 'element_delete')">
-        <span class="btn-text">删除元素</span>
-      </button>
-      <button class="guide-btn close-btn" @click="emits('close')">
-        <span class="btn-text">×</span>
-      </button>
+      <div class="flex-shrink-0 px-1">
+        <img :src="logo" class="w-4 h-4" alt="logo" />
+      </div>
+      <div class="flex-grow">
+        <button v-for="btn in btnList" class="guide-btn" @click="emits('selectCommand', btn.type)">
+          <span class="btn-text">{{ btn.text }}</span>
+        </button>
+      </div>
+      <div class="flex-shrink-0">
+        <button
+          class="w-4 h-4 rounded-full px-1 hover:bg-gray-100 flex items-center justify-center"
+          @click="emits('close')"
+        >
+          <span class="btn-text">×</span>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -24,17 +40,13 @@ const emits = defineEmits<{
 <style scoped>
 @reference "@/assets/main.css";
 
-.panel__guide {
-  @apply p-1;
-}
-
 .guide-layer {
-  @apply flex items-center gap-1 rounded-md backdrop-blur-sm bg-white/80  p-1;
+  @apply flex items-center gap-1 rounded-md backdrop-blur-sm p-1 px-2;
 }
 
 .guide-btn {
-  @apply relative overflow-hidden rounded-md px-3 py-1.5 text-sm font-medium transition-all duration-300 ease-in-out cursor-pointer border-0 bg-transparent text-gray-700 dark:text-gray-200;
-  @apply hover:bg-gray-100 dark:hover:bg-gray-700;
+  @apply relative overflow-hidden rounded-md px-2.5 py-1.5 text-sm font-medium transition-all duration-300 ease-in-out cursor-pointer border-0 bg-transparent text-gray-700 dark:text-gray-200;
+  @apply hover:bg-gray-100;
 }
 
 .guide-btn::before {
@@ -45,10 +57,6 @@ const emits = defineEmits<{
 
 .guide-btn:hover::before {
   @apply w-4/5;
-}
-
-.close-btn {
-  @apply px-2;
 }
 
 .btn-text {

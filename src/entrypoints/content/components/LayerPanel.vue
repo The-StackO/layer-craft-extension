@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { NPopover } from 'naive-ui';
 import { useElementBounding } from '@vueuse/core';
+import type { ChangeType } from '@/services/history/types';
 import GuidePanel from './panel/GuidePanel.vue';
 import TextReplacePanel from './panel/TextReplacePanel.vue';
+import ElementDeletePanel from './panel/ElementDeletePanel.vue';
 
 const props = defineProps<{
   target: HTMLElement | null;
@@ -27,9 +29,9 @@ const updatePanelPosition = () => {
   }
 };
 
-const openedPanel = ref('guide');
+const openedPanel = ref<'guide' | ChangeType>('guide');
 
-const handlePanelSelect = (panel: string) => {
+const handlePanelCommand = (panel: ChangeType) => {
   openedPanel.value = panel;
 };
 
@@ -37,6 +39,7 @@ watch(
   () => props.target,
   newTarget => {
     if (newTarget) {
+      openedPanel.value = 'guide';
       showPanel.value = true;
       currentTarget.value = newTarget;
     } else {
@@ -53,7 +56,7 @@ watch([x, y, width, height], () => {
 </script>
 
 <template>
-  <div ref="panelRef" class="layer-craft-panel">
+  <div ref="panelRef" class="layer-craft-panel absolute top-0 left-0">
     <n-popover
       :show="showPanel"
       :x="panelX"
@@ -62,13 +65,16 @@ watch([x, y, width, height], () => {
       :z-index="2147483647"
       :to="panelRef?.$el || panelRef"
       @clickoutside="emits('close')"
+      :class="{
+        '!p-0': openedPanel === 'guide',
+      }"
     >
       <template #trigger>
         <div style="position: fixed; width: 0; height: 0"></div>
       </template>
       <GuidePanel
         v-if="openedPanel === 'guide'"
-        @panel-select="handlePanelSelect"
+        @select-command="handlePanelCommand"
         @close="emits('close')"
       />
       <TextReplacePanel
@@ -76,18 +82,13 @@ watch([x, y, width, height], () => {
         :target="target"
         @close="emits('close')"
       />
+      <ElementDeletePanel
+        v-else-if="openedPanel === 'element_delete'"
+        :target="target"
+        @close="emits('close')"
+      />
     </n-popover>
   </div>
 </template>
 
-<style scoped>
-@reference '@/assets/main.css';
-
-.layer-craft-panel {
-  @apply absolute top-0 left-0;
-}
-
-.layer-craft-panel :deep(.n-popover) {
-  padding: 0 !important;
-}
-</style>
+<style scoped></style>

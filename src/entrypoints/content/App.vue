@@ -21,10 +21,6 @@ const handlePanelClose = () => {
 };
 
 onMounted(() => {
-  onMessage('ping', message => {
-    return true;
-  });
-
   getProxiedHistoryService()
     .getHistoryByUrl(getCurrentLocation())
     .then(historyItems => {
@@ -41,18 +37,6 @@ onMounted(() => {
   // 监听选择元素
   onMessage('selection', message => {
     isInspecting.value = message.data.type === 'start';
-    return true;
-  });
-
-  // 监听撤销改动
-  onMessage('makeUndo', message => {
-    const { type, xpath, before, after } = message.data;
-    if (type === 'text_replace') {
-      const element = getElementByXpath(xpath);
-      if (element) {
-        element.textContent = before;
-      }
-    }
     return true;
   });
 });

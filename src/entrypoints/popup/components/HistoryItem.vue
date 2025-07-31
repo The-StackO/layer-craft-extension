@@ -23,8 +23,10 @@ function getChangeTypeInfo(type: HistoryItem['type']) {
   switch (type) {
     case 'text_replace':
       return { text: '文本替换', tagType: 'success' as const };
-    case 'style_modify':
-      return { text: '样式修改', tagType: 'info' as const };
+    case 'element_delete':
+      return { text: '删除元素', tagType: 'info' as const };
+    case 'image_replace':
+      return { text: '图片替换', tagType: 'warning' as const };
     default:
       return { text: '未知操作', tagType: 'default' as const };
   }

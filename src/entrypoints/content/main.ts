@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import { setupNaiveStyles } from './naive';
+import { setupNaiveStyles } from './utils/naive';
+import './utils/on-messaging';
 
 export const createVueApp = (container: HTMLElement) => {
   const app = createApp(App);

@@ -25,13 +25,7 @@ const handleSelectElement = async () => {
 const handleHistoryUndo = async (history: HistoryItem) => {
   const activeTab = await getActiveTab();
   if (activeTab) {
-    const undoMessage = {
-      type: history.type,
-      xpath: history.xpath,
-      before: history.before,
-      after: history.after,
-    };
-    await sendMessage('makeUndo', undoMessage, activeTab.id);
+    await sendMessage('makeUndo', history, activeTab.id);
     await getProxiedHistoryService().deleteHistoryItem(history.id);
     historyItems.value = historyItems.value.filter(item => item.id !== history.id);
   }

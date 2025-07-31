@@ -57,7 +57,7 @@ export function getElementsByXpath(xpath: string, contextNode: Node = document):
  * @param element - 需要计算 XPath 的 HTML 元素。
  * @returns {string} 计算出的 XPath 字符串。
  */
-export function getXpathForElement(element: HTMLElement): string {
+export function getXpathForElement(element: HTMLElement | null): string {
   // 如果元素无效，则返回空字符串
   if (!element || !(element instanceof HTMLElement)) {
     console.warn('提供的参数不是一个有效的 HTMLElement。');
@@ -76,12 +76,12 @@ export function getXpathForElement(element: HTMLElement): string {
 
   while (current && current.nodeType === Node.ELEMENT_NODE) {
     const tagName = current.nodeName.toLowerCase();
-    
+
     // 如果我们到达了文档的顶层（body 或 html），就不需要计算索引了。
     if (current === document.body) {
       segments.unshift('body');
       // 假设 body 是 html 的直接子元素
-      segments.unshift('html'); 
+      segments.unshift('html');
       break;
     }
 
@@ -104,4 +104,13 @@ export function getXpathForElement(element: HTMLElement): string {
   }
 
   return segments.length ? '/' + segments.join('/') : '';
+}
+
+/**
+ * 计算一个 DOM 元素在其父元素的子元素列表中的索引位置。
+ * @param element 要计算索引的目标元素。
+ * @returns {number} 元素在其父元素中的索引。如果元素没有父元素，则返回 -1。
+ */
+export function getElementIndex(element: HTMLElement): number {
+  return Array.from(element.parentElement?.children || []).indexOf(element);
 }

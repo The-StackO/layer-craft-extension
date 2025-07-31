@@ -6,17 +6,7 @@ interface ProtocolMap {
   // 开始选择元素
   selection({ type }: { type: 'start' | 'stop' }): boolean;
   // 撤销改动
-  makeUndo({
-    type,
-    xpath,
-    before,
-    after,
-  }: {
-    type: HistoryItem['type'];
-    xpath: string;
-    before: string;
-    after: string;
-  }): boolean;
+  makeUndo(history: HistoryItem): boolean;
 }
 
 export const { sendMessage, onMessage } = defineExtensionMessaging<ProtocolMap>();
