@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  modules: ['@wxt-dev/module-vue'],
+  modules: ['@wxt-dev/module-vue', '@wxt-dev/auto-icons'],
   srcDir: 'src',
   vite: () => ({
     plugins: [tailwindcss()],
@@ -13,5 +13,8 @@ export default defineConfig({
     description:
       '层舟(LayerCraft) 像用魔术贴一样，轻松修改网页文本、替换图片，支持一键撤销和截图分享。是一款不会编程也能轻松上手的网页编辑器。',
     permissions: ['storage'],
+  },
+  autoIcons: {
+    baseIconPath: 'assets/logo/logo.svg',
   },
 });

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import logo from '@/assets/logo.svg';
 import type { ChangeType } from '@/services/history/types';
 
 const emits = defineEmits<{
@@ -18,7 +17,7 @@ const btnList: { text: string; type: ChangeType }[] = [
   <div class="panel__guide">
     <div class="guide-layer">
       <div class="flex-shrink-0 px-1">
-        <img :src="logo" class="w-4 h-4" alt="logo" />
+        <img src="@/assets/logo/logo.svg" class="w-4 h-4" alt="logo" />
       </div>
       <div class="flex-grow">
         <button v-for="btn in btnList" class="guide-btn" @click="emits('selectCommand', btn.type)">
