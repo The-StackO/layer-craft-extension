@@ -14,6 +14,8 @@ onMessage('makeUndo', message => {
     undoTextReplace(message.data);
   } else if (type === 'element_delete') {
     undoElementDelete(message.data);
+  } else if (type === 'image_replace') {
+    undoImageReplace(message.data);
   }
   return true;
 });
@@ -46,5 +48,14 @@ const undoElementDelete = (history: HistoryItem) => {
     parentElement.insertBefore(restoredElement, referenceNode);
   } else {
     parentElement.appendChild(restoredElement);
+  }
+};
+
+const undoImageReplace = (history: HistoryItem) => {
+  const { xpath, before, after } = history;
+
+  const element = getElementByXpath(xpath);
+  if (element) {
+    (element as HTMLImageElement).src = before;
   }
 };

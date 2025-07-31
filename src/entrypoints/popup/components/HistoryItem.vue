@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ArrowForward, ArrowUndo } from '@vicons/ionicons5';
 import { formatTimeAgo } from '@vueuse/core';
-import { NButton, NIcon, NTag, NThing, NTooltip } from 'naive-ui';
+import { NButton, NIcon, NTag, NImage, NTooltip } from 'naive-ui';
 import type { HistoryItem } from '@/services/history/types';
 
 defineProps<{
@@ -63,10 +63,14 @@ function getChangeTypeInfo(type: HistoryItem['type']) {
       <div class="flex-1 min-w-0">
         <div class="font-medium text-gray-500 text-xs mb-2 flex items-center">修改前</div>
         <span
-          class="font-mono bg-red-50 text-red-700 dark:text-red-300 p-3 rounded-lg truncate block text-xs leading-relaxed border border-red-100 dark:border-red-900/30"
+          v-if="item.type === 'text_replace' || item.type === 'element_delete'"
+          class="font-mono bg-red-50 text-red-700 p-3 rounded-lg truncate block text-xs leading-relaxed border border-red-100"
         >
           {{ item.before }}
         </span>
+        <div v-else-if="item.type === 'image_replace'">
+          <n-image width="100" :src="item.before" />
+        </div>
       </div>
       <n-icon
         :component="ArrowForward"
@@ -76,10 +80,14 @@ function getChangeTypeInfo(type: HistoryItem['type']) {
       <div class="flex-1 min-w-0">
         <div class="font-medium text-gray-500 text-xs mb-2 flex items-center">修改后</div>
         <span
+          v-if="item.type === 'text_replace' || item.type === 'element_delete'"
           class="font-mono bg-green-50 text-green-700 p-3 rounded-lg truncate block text-xs leading-relaxed border border-green-100"
         >
           {{ item.after }}
         </span>
+        <div v-else-if="item.type === 'image_replace'">
+          <n-image width="100" :src="item.after" />
+        </div>
       </div>
     </div>
   </div>

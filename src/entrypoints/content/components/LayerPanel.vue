@@ -5,6 +5,7 @@ import type { ChangeType } from '@/services/history/types';
 import GuidePanel from './panel/GuidePanel.vue';
 import TextReplacePanel from './panel/TextReplacePanel.vue';
 import ElementDeletePanel from './panel/ElementDeletePanel.vue';
+import ImageReplacePanel from './panel/ImageReplacePanel.vue';
 
 const props = defineProps<{
   target: HTMLElement | null;
@@ -84,6 +85,11 @@ watch([x, y, width, height], () => {
       />
       <ElementDeletePanel
         v-else-if="openedPanel === 'element_delete'"
+        :target="target"
+        @close="emits('close')"
+      />
+      <ImageReplacePanel
+        v-else-if="openedPanel === 'image_replace'"
         :target="target"
         @close="emits('close')"
       />

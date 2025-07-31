@@ -9,8 +9,8 @@ const emits = defineEmits<{
 
 const btnList: { text: string; type: ChangeType }[] = [
   { text: '文本替换', type: 'text_replace' },
-  { text: '删除元素', type: 'element_delete' },
   { text: '图片替换', type: 'image_replace' },
+  { text: '删除元素', type: 'element_delete' },
 ];
 </script>
 

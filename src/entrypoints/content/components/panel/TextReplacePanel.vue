@@ -9,12 +9,12 @@ const props = defineProps<{
   target: HTMLElement | null;
 }>();
 
-const originalText = computed(() => props.target?.textContent?.trim());
-const replacedText = ref('');
-
 const emits = defineEmits<{
   (e: 'close'): void;
 }>();
+
+const originalText = computed(() => props.target?.textContent?.trim());
+const replacedText = ref(originalText.value);
 
 const onConfirm = async () => {
   if (props.target && replacedText.value) {
@@ -34,7 +34,7 @@ const onConfirm = async () => {
 </script>
 
 <template>
-  <div class="panel__text-replace space-y-2">
+  <div class="panel__text-replace space-y-2 w-70">
     <div class="panel-header flex justify-center font-bold">文本替换</div>
     <div class="panel-body">
       <n-form size="small">
