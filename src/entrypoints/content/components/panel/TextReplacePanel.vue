@@ -35,20 +35,29 @@ const onConfirm = async () => {
 
 <template>
   <div class="panel__text-replace space-y-2 w-70">
-    <div class="panel-header flex justify-center font-bold">文本替换</div>
+    <div class="panel-header flex justify-center font-bold">
+      {{ i18n.t('content.layerPanel.textReplacePanel.title') }}
+    </div>
     <div class="panel-body">
       <n-form size="small">
-        <n-form-item label="原文本">
+        <n-form-item :label="i18n.t('content.layerPanel.textReplacePanel.originalLabel')">
           <n-input v-model:value="originalText" disabled></n-input>
         </n-form-item>
-        <n-form-item label="替换为" type="textarea">
+        <n-form-item
+          :label="i18n.t('content.layerPanel.textReplacePanel.replacedLabel')"
+          type="textarea"
+        >
           <n-input v-model:value="replacedText"></n-input>
         </n-form-item>
       </n-form>
     </div>
     <div class="panel-footer flex justify-end gap-2">
-      <n-button size="small" @click="emits('close')">取消</n-button>
-      <n-button size="small" type="primary" @click="onConfirm">确定</n-button>
+      <n-button size="small" @click="emits('close')">
+        {{ i18n.t('content.layerPanel.cancelButton') }}
+      </n-button>
+      <n-button size="small" type="primary" @click="onConfirm">
+        {{ i18n.t('content.layerPanel.confirmButton') }}
+      </n-button>
     </div>
   </div>
 </template>

@@ -44,7 +44,7 @@ onMounted(async () => {
   <div class="w-full h-full">
     <div class="flex-shrink-0 mb-6 p-5 rounded-xl shadow-sm transition-all duration-300">
       <p class="text-sm text-gray-500 mb-5 text-center leading-relaxed">
-        点击下方按钮，在页面上选择元素进行修改
+        {{ i18n.t('popup.main.elementSelectTips') }}
       </p>
       <n-button
         type="primary"
@@ -53,15 +53,17 @@ onMounted(async () => {
         block
         :disabled="!contentScriptInjected"
       >
-        选择页面元素
+        {{ i18n.t('popup.main.elementSelectButton') }}
       </n-button>
       <p class="text-xs text-amber-500 mt-3" v-if="!contentScriptInjected">
-        无法操作当前页面的元素，可能是由于新标签页或浏览器特权页面等
+        {{ i18n.t('popup.main.unableSelectElement') }}
       </p>
     </div>
 
     <n-divider class="!my-4 flex-shrink-0">
-      <span class="text-xs text-gray-400 px-3 py-1 rounded-full">历史记录</span>
+      <span class="text-xs text-gray-400 px-3 py-1 rounded-full">
+        {{ i18n.t('popup.main.history.divider') }}
+      </span>
     </n-divider>
 
     <div class="flex-grow overflow-hidden">

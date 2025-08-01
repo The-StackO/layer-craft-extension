@@ -11,7 +11,7 @@ const handleOpenGithub = async () => {
   <div class="w-full h-full flex items-center justify-between px-4 py-3">
     <div class="flex items-center">
       <img src="@/assets/logo/logo.svg" class="w-5 h-5 mr-2" alt="logo" />
-      <a class="text-sm font-bold">层舟-网页魔术贴</a>
+      <a class="text-sm font-bold">{{ i18n.t('popup.header.title') }}</a>
     </div>
     <div class="flex-shrink-0 p-1">
       <span

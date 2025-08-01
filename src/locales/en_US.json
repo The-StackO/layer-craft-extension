@@ -1,0 +1,59 @@
+{
+  "extName": {
+    "message": "LayerCraft - Web Magic Sticker"
+  },
+  "extDescription": {
+    "message": "LayerCraft lets you easily modify web page text and replace images, just like using magic stickers. It supports one-click undo and screenshot sharing. It's a web editor that's easy to use even without programming skills."
+  },
+  "popup": {
+    "header": {
+      "title": "LayerCraft - Web Magic Sticker"
+    },
+    "footer": {
+      "version": "Version"
+    },
+    "main": {
+      "elementSelectButton": "Select Page Element",
+      "elementSelectTips": "Click the button below to select an element on the page to modify",
+      "unableSelectElement": "Cannot operate on elements of the current page. This may be due to it being a new tab page or a browser-privileged page.",
+      "history": {
+        "divider": "History",
+        "noHistoryDesc": "No operation history yet",
+        "placeholder": "All your modifications will be recorded here",
+        "changeType": {
+          "textReplace": "Text Replace",
+          "imageReplace": "Image Replace",
+          "elementDelete": "Delete Element",
+          "unknown": "Unknown Action"
+        },
+        "undoButton": "Undo",
+        "changeBefore": "Before",
+        "changeAfter": "After"
+      }
+    }
+  },
+  "content": {
+    "layerPanel": {
+      "cancelButton": "Cancel",
+      "confirmButton": "Confirm",
+      "guidePanel": {
+        "textReplace": "Text Replace",
+        "imageReplace": "Image Replace",
+        "elementDelete": "Delete Element"
+      },
+      "textReplacePanel": {
+        "title": "Text Replace",
+        "originalLabel": "Original Text",
+        "replaceLabel": "Replace With"
+      },
+      "imageReplacePanel": {
+        "title": "Image Replace",
+        "invalidImagePlaceholder": "The currently selected element is not an image."
+      },
+      "elementDeletePanel": {
+        "title": "Delete Element",
+        "description": "Are you sure you want to delete the currently selected element?"
+      }
+    }
+  }
+}

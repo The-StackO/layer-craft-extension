@@ -1,0 +1,59 @@
+{
+  "extName": {
+    "message": "层舟-网页魔术贴"
+  },
+  "extDescription": {
+    "message": "层舟像用魔术贴一样，轻松修改网页文本、替换图片，支持一键撤销和截图分享。是一款不会编程也能轻松上手的网页编辑器。"
+  },
+  "popup": {
+    "header": {
+      "title": "层舟-网页魔术贴"
+    },
+    "footer": {
+      "version": "版本"
+    },
+    "main": {
+      "elementSelectButton": "选择页面元素",
+      "elementSelectTips": "点击下方按钮，在页面上选择元素进行修改",
+      "unableSelectElement": "无法操作当前页面的元素，可能是新标签页或浏览器特权页等",
+      "history": {
+        "divider": "历史记录",
+        "noHistoryDesc": "暂无操作历史",
+        "placeholder": "您的所有修改都将记录在此",
+        "changeType": {
+          "textReplace": "文本替换",
+          "imageReplace": "图片替换",
+          "elementDelete": "删除元素",
+          "unknown": "未知操作"
+        },
+        "undoButton": "撤销",
+        "changeBefore": "修改前",
+        "changeAfter": "修改后"
+      }
+    }
+  },
+  "content": {
+    "layerPanel": {
+      "cancelButton": "取消",
+      "confirmButton": "确定",
+      "guidePanel": {
+        "textReplace": "文本替换",
+        "imageReplace": "图片替换",
+        "elementDelete": "删除元素"
+      },
+      "textReplacePanel": {
+        "title": "文本替换",
+        "originalLabel": "原文本",
+        "replaceLabel": "替换为"
+      },
+      "imageReplacePanel": {
+        "title": "图片替换",
+        "invalidImagePlaceholder": "当前选中的元素不是图片"
+      },
+      "elementDeletePanel": {
+        "title": "删除元素",
+        "description": "是否删除当前选中的元素？"
+      }
+    }
+  }
+}

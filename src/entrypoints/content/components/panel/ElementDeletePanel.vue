@@ -32,13 +32,21 @@ const onConfirm = async () => {
 
 <template>
   <div class="panel__element-delete space-y-2 w-70">
-    <div class="panel-header flex justify-center font-bold">删除元素</div>
+    <div class="panel-header flex justify-center font-bold">
+      {{ i18n.t('content.layerPanel.elementDeletePanel.title') }}
+    </div>
     <div class="panel-body">
-      <p class="text-amber-500 text-center">是否删除当前选中的元素？</p>
+      <p class="text-amber-500 text-center">
+        {{ i18n.t('content.layerPanel.elementDeletePanel.description') }}
+      </p>
     </div>
     <div class="panel-footer flex justify-end gap-2">
-      <n-button size="small" @click="emits('close')">取消</n-button>
-      <n-button size="small" type="primary" @click="onConfirm">确定</n-button>
+      <n-button size="small" @click="emits('close')">
+        {{ i18n.t('content.layerPanel.cancelButton') }}
+      </n-button>
+      <n-button size="small" type="primary" @click="onConfirm">
+        {{ i18n.t('content.layerPanel.confirmButton') }}
+      </n-button>
     </div>
   </div>
 </template>

@@ -22,13 +22,25 @@ function handleUndoClick(history: HistoryItem) {
 function getChangeTypeInfo(type: HistoryItem['type']) {
   switch (type) {
     case 'text_replace':
-      return { text: '文本替换', tagType: 'success' as const };
+      return {
+        text: i18n.t('popup.main.history.changeType.textReplace'),
+        tagType: 'success' as const,
+      };
     case 'element_delete':
-      return { text: '删除元素', tagType: 'info' as const };
+      return {
+        text: i18n.t('popup.main.history.changeType.elementDelete'),
+        tagType: 'info' as const,
+      };
     case 'image_replace':
-      return { text: '图片替换', tagType: 'warning' as const };
+      return {
+        text: i18n.t('popup.main.history.changeType.imageReplace'),
+        tagType: 'warning' as const,
+      };
     default:
-      return { text: '未知操作', tagType: 'default' as const };
+      return {
+        text: i18n.t('popup.main.history.changeType.unknown'),
+        tagType: 'default' as const,
+      };
   }
 }
 </script>
@@ -54,14 +66,16 @@ function getChangeTypeInfo(type: HistoryItem['type']) {
               </template>
             </n-button>
           </template>
-          <span>撤销</span>
+          <span>{{ i18n.t('popup.main.history.undoButton') }}</span>
         </n-tooltip>
       </div>
     </div>
 
     <div class="text-xs flex items-start">
       <div class="flex-1 min-w-0">
-        <div class="font-medium text-gray-500 text-xs mb-2 flex items-center">修改前</div>
+        <div class="font-medium text-gray-500 text-xs mb-2 flex items-center">
+          {{ i18n.t('popup.main.history.changeBefore') }}
+        </div>
         <span
           v-if="item.type === 'text_replace' || item.type === 'element_delete'"
           class="font-mono bg-red-50 text-red-700 p-3 rounded-lg truncate block text-xs leading-relaxed border border-red-100"
@@ -78,7 +92,9 @@ function getChangeTypeInfo(type: HistoryItem['type']) {
         :size="16"
       />
       <div class="flex-1 min-w-0">
-        <div class="font-medium text-gray-500 text-xs mb-2 flex items-center">修改后</div>
+        <div class="font-medium text-gray-500 text-xs mb-2 flex items-center">
+          {{ i18n.t('popup.main.history.changeAfter') }}
+        </div>
         <span
           v-if="item.type === 'text_replace' || item.type === 'element_delete'"
           class="font-mono bg-green-50 text-green-700 p-3 rounded-lg truncate block text-xs leading-relaxed border border-green-100"

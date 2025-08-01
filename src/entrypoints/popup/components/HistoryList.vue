@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NEmpty, NList, NListItem } from 'naive-ui';
+import { NEmpty } from 'naive-ui';
 import HistoryItemComponent from './HistoryItem.vue';
 import type { HistoryItem } from '@/services/history/types';
 
@@ -25,13 +25,11 @@ const emits = defineEmits<{
         </div>
       </div>
 
-      <n-empty
-        v-else
-        description="暂无操作历史"
-        class="h-full flex justify-center items-center flex-col py-10"
-      >
+      <n-empty v-else description="" class="h-full flex justify-center items-center flex-col py-10">
         <template #extra>
-          <span class="text-gray-500 text-xs mt-3">您的所有修改都将记录在此</span>
+          <span class="text-gray-500 text-xs mt-3">
+            {{ i18n.t('popup.main.history.placeholder') }}
+          </span>
         </template>
       </n-empty>
     </div>
