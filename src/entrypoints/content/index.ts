@@ -1,7 +1,7 @@
 import '@/assets/main.css';
 import './style.css';
 import { createVueApp } from './main';
-import { analytics } from '#analytics';
+import * as analytics from '@/utils/analytics';
 
 export default defineContentScript({
   matches: ['<all_urls>'],

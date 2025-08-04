@@ -18,6 +18,10 @@ const replacedText = ref(originalText.value);
 
 const onConfirm = async () => {
   if (props.target && replacedText.value) {
+    trackEvent('confirm_text_replace', {
+      source: 'content',
+    });
+
     props.target.textContent = replacedText.value;
 
     await getProxiedHistoryService().addHistoryItem({

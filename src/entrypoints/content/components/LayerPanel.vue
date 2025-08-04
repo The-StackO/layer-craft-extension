@@ -33,6 +33,10 @@ const updatePanelPosition = () => {
 const openedPanel = ref<'guide' | ChangeType>('guide');
 
 const handlePanelCommand = (panel: ChangeType) => {
+  trackEvent('click_guide_panel_' + panel, {
+    source: 'content',
+    change_type: panel,
+  });
   openedPanel.value = panel;
 };
 

@@ -4,12 +4,12 @@ import { NConfigProvider, NLayout, NLayoutContent, NLayoutFooter, NLayoutHeader 
 import PopupHeader from './components/PopupHeader.vue';
 import PopupFooter from './components/PopupFooter.vue';
 import PopupMain from './components/PopupMain.vue';
-import { analytics } from '#analytics';
+import * as analytics from '@/utils/analytics';
 
 onMounted(() => {
   analytics.autoTrack(document);
 
-  analytics.track('popup_open');
+  analytics.trackEvent('popup_open');
 });
 </script>
 

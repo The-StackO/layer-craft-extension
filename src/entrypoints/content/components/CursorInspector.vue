@@ -89,6 +89,9 @@ watch(
     isSelecting.value = value;
 
     if (value) {
+      trackEvent('start_inspecting', {
+        source: 'content',
+      });
       addEventListeners();
     } else {
       removeEventListeners();

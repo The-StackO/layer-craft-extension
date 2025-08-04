@@ -14,6 +14,10 @@ const emits = defineEmits<{
 
 const onConfirm = async () => {
   if (props.target) {
+    trackEvent('confirm_element_delete', {
+      source: 'content',
+    });
+
     await getProxiedHistoryService().addHistoryItem({
       type: 'element_delete',
       url: getCurrentLocation(),

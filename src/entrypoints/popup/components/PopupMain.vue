@@ -15,6 +15,9 @@ const historyItems = ref<HistoryItem[]>([]);
  * 处理"选择元素"按钮的点击事件
  */
 const handleSelectElement = async () => {
+  trackEvent('click_select_element_button', {
+    source: 'popup',
+  });
   const activeTab = await getActiveTab();
   if (activeTab) {
     await sendMessage('selection', { type: 'start' }, activeTab.id);
@@ -23,6 +26,10 @@ const handleSelectElement = async () => {
 };
 
 const handleHistoryUndo = async (history: HistoryItem) => {
+  trackEvent('click_history_undo_button', {
+    source: 'popup',
+    historyId: history.id,
+  });
   const activeTab = await getActiveTab();
   if (activeTab) {
     await sendMessage('makeUndo', history, activeTab.id);

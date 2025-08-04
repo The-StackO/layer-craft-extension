@@ -21,6 +21,10 @@ const replacedImage = ref(originalImage.value);
 
 const onConfirm = async () => {
   if (isImageElement) {
+    trackEvent('confirm_image_replace', {
+      source: 'content',
+    });
+
     await getProxiedHistoryService().addHistoryItem({
       type: 'image_replace',
       url: getCurrentLocation(),

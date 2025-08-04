@@ -3,6 +3,9 @@ import { NIcon } from 'naive-ui';
 import { LogoGithub } from '@vicons/ionicons5';
 
 const handleOpenGithub = async () => {
+  trackEvent('click_github_link', {
+    source: 'popup',
+  });
   await browser.tabs.create({ url: 'https://github.com/The-StackO/layer-craft-extension' });
 };
 </script>
