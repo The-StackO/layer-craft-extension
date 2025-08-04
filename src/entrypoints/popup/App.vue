@@ -1,8 +1,16 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { NConfigProvider, NLayout, NLayoutContent, NLayoutFooter, NLayoutHeader } from 'naive-ui';
 import PopupHeader from './components/PopupHeader.vue';
 import PopupFooter from './components/PopupFooter.vue';
 import PopupMain from './components/PopupMain.vue';
+import { analytics } from '#analytics';
+
+onMounted(() => {
+  analytics.autoTrack(document);
+
+  analytics.track('popup_open');
+});
 </script>
 
 <template>

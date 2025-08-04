@@ -24,6 +24,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "@vicons/ionicons5": "^0.13.0",
+    "@wxt-dev/analytics": "^0.5.0",
     "@wxt-dev/auto-icons": "^1.0.2",
     "@wxt-dev/i18n": "^0.2.4",
     "@wxt-dev/module-vue": "^1.0.2",

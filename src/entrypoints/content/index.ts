@@ -1,6 +1,7 @@
 import '@/assets/main.css';
 import './style.css';
 import { createVueApp } from './main';
+import { analytics } from '#analytics';
 
 export default defineContentScript({
   matches: ['<all_urls>'],
@@ -12,6 +13,7 @@ export default defineContentScript({
       position: 'inline',
       anchor: 'body',
       onMount: container => {
+        analytics.autoTrack(container);
         return createVueApp(container);
       },
       onRemove: app => {
