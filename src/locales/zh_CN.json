@@ -44,7 +44,7 @@
       "textReplacePanel": {
         "title": "文本替换",
         "originalLabel": "原文本",
-        "replaceLabel": "替换为"
+        "replacedLabel": "替换为"
       },
       "imageReplacePanel": {
         "title": "图片替换",

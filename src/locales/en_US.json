@@ -44,7 +44,7 @@
       "textReplacePanel": {
         "title": "Text Replace",
         "originalLabel": "Original Text",
-        "replaceLabel": "Replace With"
+        "replacedLabel": "Replace With"
       },
       "imageReplacePanel": {
         "title": "Image Replace",
