@@ -1,20 +1,20 @@
 # LayerCraft Design System
 
-本文档是“层舟 (LayerCraft)”浏览器插件的官方设计指南，旨在确保产品在视觉和体验上的一致性。
+本文档是"层舟 (LayerCraft)"浏览器插件的官方设计指南，旨在确保产品在视觉和体验上的一致性。
 
 ## 调色板 (Color Palette)
 
-我们选择了一套以“魔力青”为主色、“灵感紫”为辅色的调色板，旨在体现产品的**创造力、现代感与可靠性**。
+我们选择了一套以"创意橙"为主色、"创意蓝"为辅色的调色板，旨在体现产品的**创造力、活力与编辑功能**。
 
 ---
 
-### 主题色: 魔力青 (Magic Teal)
+### 主题色: 陶土橙 (Terracotta Orange)
 
-“魔力青”介于蓝绿之间，既有蓝色的沉稳可靠，又兼具绿色的生机与活力，完美契合 `Craft` 的概念。
+"陶土橙"传达专业、稳重和创造力，低饱和度的设计让长时间使用更加舒适，完美契合网页内容编辑的核心功能。
 
-- **Primary:** `#14B8A6` <span style="display:inline-block; width:12px; height:12px; background-color:#14B8A6; border:1px solid #ccc;"></span>
-- **Hover:** `#0F766E` <span style="display:inline-block; width:12px; height:12px; background-color:#0F766E; border:1px solid #ccc;"></span>
-- **Active:** `#0D9488` <span style="display:inline-block; width:12px; height:12px; background-color:#0D9488; border:1px solid #ccc;"></span>
+- **Primary:** `#E67E22` <span style="display:inline-block; width:12px; height:12px; background-color:#E67E22; border:1px solid #ccc;"></span>
+- **Hover:** `#D06E1A` <span style="display:inline-block; width:12px; height:12px; background-color:#D06E1A; border:1px solid #ccc;"></span>
+- **Active:** `#B85E12` <span style="display:inline-block; width:12px; height:12px; background-color:#B85E12; border:1px solid #ccc;"></span>
 - **Text on Primary:** `#FFFFFF` <span style="display:inline-block; width:12px; height:12px; background-color:#FFFFFF; border:1px solid #ccc;"></span>
 
 **用途:**
@@ -24,13 +24,13 @@
 
 ---
 
-### 辅色: 灵感紫 (Inspiration Purple)
+### 辅色: 创意蓝 (Creative Blue)
 
-“灵感紫”用于特别需要强调的操作或装饰性元素，与主色形成活力对比，增强“魔法”和“创造力”的感觉。
+"创意蓝"作为审查器高亮色，与主色形成活力对比，提供清晰的功能指示和视觉引导。
 
-- **Accent:** `#8B5CF6` <span style="display:inline-block; width:12px; height:12px; background-color:#8B5CF6; border:1px solid #ccc;"></span>
-- **Hover:** `#7C3AED` <span style="display:inline-block; width:12px; height:12px; background-color:#7C3AED; border:1px solid #ccc;"></span>
-- **Active:** `#6D28D9` <span style="display:inline-block; width:12px; height:12px; background-color:#6D28D9; border:1px solid #ccc;"></span>
+- **Accent:** `#4ECDC4` <span style="display:inline-block; width:12px; height:12px; background-color:#4ECDC4; border:1px solid #ccc;"></span>
+- **Hover:** `#45B7AA` <span style="display:inline-block; width:12px; height:12px; background-color:#45B7AA; border:1px solid #ccc;"></span>
+- **Active:** `#3DA190` <span style="display:inline-block; width:12px; height:12px; background-color:#3DA190; border:1px solid #ccc;"></span>
 
 **用途:**
 - 特殊提示、徽章
@@ -41,11 +41,11 @@
 
 ### 审查器高亮 (Inspector Highlight)
 
-这是核心功能的交互颜色，需要清晰且具有“魔法感”。
+这是核心功能的交互颜色，需要清晰且具有"编辑感"。
 
-- **Fill:** `rgba(139, 92, 246, 0.6)` (使用辅色“灵感紫”的 60% 透明度)
-- **Main Border:** `#A78BFA` (一个更亮的紫色)
-- **Glow Effect:** `#8B5CF6` (辅色“灵感紫”)
+- **Fill:** `rgba(230, 126, 34, 0.25)` (使用主色"陶土橙"的 25% 透明度)
+- **Main Border:** `#E67E22` (主色"陶土橙")
+- **Glow Effect:** `#E67E22` (主色"陶土橙")
 
 ---
 
