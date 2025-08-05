@@ -7,7 +7,7 @@ export default defineAppConfig({
     debug: true,
     version: version,
     enabled: storage.defineItem('local:analytics-enabled', {
-      fallback: true,
+      fallback: import.meta.env.PROD,
     }),
     // @ts-ignore
     userId: storage.defineItem('local:lc-user-id', {
