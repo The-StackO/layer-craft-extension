@@ -1,9 +1,34 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 :root {
-    --lc-inspector-main: #42d392;
-    --lc-inspector-glow: rgba(0, 220, 130, 0.6);
-    --lc-inspector-fill: rgba(66, 211, 146, 0.12);
+  /* 主题色: 魔力青 */
+  --lc-primary: #14b8a6;
+  --lc-primary-hover: #0f766e;
+  --lc-primary-active: #0d9488;
+  --lc-primary-text: #ffffff;
+
+  /* 辅色: 灵感紫 */
+  --lc-accent: #8b5cf6;
+  --lc-accent-hover: #7c3aed;
+  --lc-accent-active: #6d28d9;
+
+  /* 审查器高亮 */
+  --lc-inspector-fill: rgba(139, 92, 246, 0.6);
+  --lc-inspector-main: #a78bfa;
+  --lc-inspector-glow: #8b5cf6;
+
+  /* 中性色 */
+  --lc-bg-main: #f9fafb;
+  --lc-bg-subtle: #ffffff;
+  --lc-border: #e5e7eb;
+  --lc-text-main: #1f2937;
+  --lc-text-subtle: #6b7280;
+  --lc-text-light: #9ca3af;
+  --lc-disabled-bg: #f3f4f6;
+  --lc-disabled-text: #9ca3af;
+
+  /* 语义颜色 */
+  --lc-success: #22c55e;
+  --lc-warning: #f59e0b;
+  --lc-error: #dc2626;
 }

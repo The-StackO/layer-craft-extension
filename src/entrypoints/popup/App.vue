@@ -5,6 +5,9 @@ import PopupHeader from './components/PopupHeader.vue';
 import PopupFooter from './components/PopupFooter.vue';
 import PopupMain from './components/PopupMain.vue';
 import * as analytics from '@/utils/analytics';
+import { useNaiveTheme } from '@/composables/useNaiveTheme';
+
+const { themeOverrides } = useNaiveTheme();
 
 onMounted(() => {
   analytics.autoTrack(document);
@@ -14,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <n-config-provider inline-theme-disabled>
+  <n-config-provider :theme-overrides="themeOverrides" inline-theme-disabled>
     <n-layout class="w-[380px] h-[478px] overflow-hidden">
       <n-layout-header bordered class="h-[52px] p-0">
         <PopupHeader />
