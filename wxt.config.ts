@@ -17,7 +17,8 @@ export default defineConfig({
     default_locale: 'en_US',
     name: '__MSG_extName__',
     description: '__MSG_extDescription__',
-    permissions: ['storage'],
+    permissions: ['storage', 'activeTab', 'scripting'],
+    host_permissions: ['<all_urls>'],
   },
   autoIcons: {
     baseIconPath: 'assets/logo/logo.svg',
