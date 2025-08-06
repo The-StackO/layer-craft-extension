@@ -1,5 +1,18 @@
 import { ref } from 'vue';
 import type { GlobalThemeOverrides } from 'naive-ui';
+import { name } from '~~/package.json';
+
+/**
+ * 获取 CSS 变量值
+ * @param variable CSS 变量名
+ * @returns CSS 变量值
+ */
+function getCssVar(variable: string): string {
+  const shadowRoot = (document.querySelector(name) as HTMLElement)?.shadowRoot;
+  const container = shadowRoot?.firstElementChild ?? document.documentElement;
+  const styles = getComputedStyle(container);
+  return styles.getPropertyValue(variable).trim() || '';
+}
 
 /**
  * @description 提供 Naive UI 的主题配置 - 使用 CSS 变量方案
@@ -16,55 +29,55 @@ export function useNaiveTheme() {
   const themeOverrides = ref<GlobalThemeOverrides>({
     common: {
       // 主题色 (直接使用 CSS 变量)
-      primaryColor: 'var(--lc-primary)',
-      primaryColorHover: 'var(--lc-primary-hover)',
-      primaryColorPressed: 'var(--lc-primary-active)',
-      primaryColorSuppl: 'var(--lc-primary-active)', // 用于 a, loading bar 等
+      primaryColor: getCssVar('--lc-primary'),
+      primaryColorHover: getCssVar('--lc-primary-hover'),
+      primaryColorPressed: getCssVar('--lc-primary-active'),
+      primaryColorSuppl: getCssVar('--lc-primary-active'), // 用于 a, loading bar 等
 
       // 成功色
-      successColor: 'var(--lc-success)',
-      successColorHover: 'var(--lc-success)',
-      successColorPressed: 'var(--lc-success)',
-      successColorSuppl: 'var(--lc-success)',
+      successColor: getCssVar('--lc-success'),
+      successColorHover: getCssVar('--lc-success'),
+      successColorPressed: getCssVar('--lc-success'),
+      successColorSuppl: getCssVar('--lc-success'),
 
       // 警告色
-      warningColor: 'var(--lc-warning)',
-      warningColorHover: 'var(--lc-warning)',
-      warningColorPressed: 'var(--lc-warning)',
-      warningColorSuppl: 'var(--lc-warning)',
+      warningColor: getCssVar('--lc-warning'),
+      warningColorHover: getCssVar('--lc-warning'),
+      warningColorPressed: getCssVar('--lc-warning'),
+      warningColorSuppl: getCssVar('--lc-warning'),
 
       // 错误/危险色
-      errorColor: 'var(--lc-error)',
-      errorColorHover: 'var(--lc-error)',
-      errorColorPressed: 'var(--lc-error)',
-      errorColorSuppl: 'var(--lc-error)',
+      errorColor: getCssVar('--lc-error'),
+      errorColorHover: getCssVar('--lc-error'),
+      errorColorPressed: getCssVar('--lc-error'),
+      errorColorSuppl: getCssVar('--lc-error'),
 
       // 中性色
-      textColorBase: 'var(--lc-text-main)', // 基本文字
-      textColor1: 'var(--lc-text-main)', // 主要文字
-      textColor2: 'var(--lc-text-subtle)', // 次要文字
-      textColor3: 'var(--lc-text-light)', // 占位符、禁用文字
-      borderColor: 'var(--lc-border)',
+      textColorBase: getCssVar('--lc-text-main'), // 基本文字
+      textColor1: getCssVar('--lc-text-main'), // 主要文字
+      textColor2: getCssVar('--lc-text-subtle'), // 次要文字
+      textColor3: getCssVar('--lc-text-light'), // 占位符、禁用文字
+      borderColor: getCssVar('--lc-border'),
       borderRadius: '4px',
     },
     // 组件级覆盖
     Button: {
       // 主要按钮文字颜色
-      textColorPrimary: 'var(--lc-primary-text)',
-      textColorHoverPrimary: 'var(--lc-primary-text)',
-      textColorPressedPrimary: 'var(--lc-primary-text)',
-      textColorFocusPrimary: 'var(--lc-primary-text)',
+      textColorPrimary: getCssVar('--lc-primary-text'),
+      textColorHoverPrimary: getCssVar('--lc-primary-text'),
+      textColorPressedPrimary: getCssVar('--lc-primary-text'),
+      textColorFocusPrimary: getCssVar('--lc-primary-text'),
       // 危险按钮文字颜色
-      textColorDanger: 'var(--lc-primary-text)',
-      textColorHoverDanger: 'var(--lc-primary-text)',
-      textColorPressedDanger: 'var(--lc-primary-text)',
-      textColorFocusDanger: 'var(--lc-primary-text)',
+      textColorDanger: getCssVar('--lc-primary-text'),
+      textColorHoverDanger: getCssVar('--lc-primary-text'),
+      textColorPressedDanger: getCssVar('--lc-primary-text'),
+      textColorFocusDanger: getCssVar('--lc-primary-text'),
     },
     Popover: {
       boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
     },
     Input: {
-      boxShadowFocus: '0 0 0 1px var(--lc-primary)',
+      boxShadowFocus: `0 0 0 1px ${getCssVar('--lc-primary')}`,
     },
   });
 

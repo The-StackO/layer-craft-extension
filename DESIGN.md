@@ -8,13 +8,13 @@
 
 ---
 
-### 主题色: 陶土橙 (Terracotta Orange)
+### 主题色: 活力橙 (Vibrant Orange)
 
-"陶土橙"传达专业、稳重和创造力，低饱和度的设计让长时间使用更加舒适，完美契合网页内容编辑的核心功能。
+"活力橙"传达现代、活力和创造力，鲜明的设计让用户界面更加生动，完美契合网页内容编辑的核心功能。
 
-- **Primary:** `#E67E22` <span style="display:inline-block; width:12px; height:12px; background-color:#E67E22; border:1px solid #ccc;"></span>
-- **Hover:** `#D06E1A` <span style="display:inline-block; width:12px; height:12px; background-color:#D06E1A; border:1px solid #ccc;"></span>
-- **Active:** `#B85E12` <span style="display:inline-block; width:12px; height:12px; background-color:#B85E12; border:1px solid #ccc;"></span>
+- **Primary:** `#F0863A` <span style="display:inline-block; width:12px; height:12px; background-color:#F0863A; border:1px solid #ccc;"></span>
+- **Hover:** `#D97533` <span style="display:inline-block; width:12px; height:12px; background-color:#D97533; border:1px solid #ccc;"></span>
+- **Active:** `#C0642C` <span style="display:inline-block; width:12px; height:12px; background-color:#C0642C; border:1px solid #ccc;"></span>
 - **Text on Primary:** `#FFFFFF` <span style="display:inline-block; width:12px; height:12px; background-color:#FFFFFF; border:1px solid #ccc;"></span>
 
 **用途:**
@@ -24,13 +24,13 @@
 
 ---
 
-### 辅色: 创意蓝 (Creative Blue)
+### 辅色: 科技青 (Tech Cyan)
 
-"创意蓝"作为审查器高亮色，与主色形成活力对比，提供清晰的功能指示和视觉引导。
+"科技青"作为审查器高亮色，与活力橙形成现代对比，提供清晰的功能指示和视觉引导。
 
-- **Accent:** `#4ECDC4` <span style="display:inline-block; width:12px; height:12px; background-color:#4ECDC4; border:1px solid #ccc;"></span>
-- **Hover:** `#45B7AA` <span style="display:inline-block; width:12px; height:12px; background-color:#45B7AA; border:1px solid #ccc;"></span>
-- **Active:** `#3DA190` <span style="display:inline-block; width:12px; height:12px; background-color:#3DA190; border:1px solid #ccc;"></span>
+- **Accent:** `#06B6D4` <span style="display:inline-block; width:12px; height:12px; background-color:#06B6D4; border:1px solid #ccc;"></span>
+- **Hover:** `#0891B2` <span style="display:inline-block; width:12px; height:12px; background-color:#0891B2; border:1px solid #ccc;"></span>
+- **Active:** `#0E7490` <span style="display:inline-block; width:12px; height:12px; background-color:#0E7490; border:1px solid #ccc;"></span>
 
 **用途:**
 - 特殊提示、徽章
@@ -43,9 +43,9 @@
 
 这是核心功能的交互颜色，需要清晰且具有"编辑感"。
 
-- **Fill:** `rgba(230, 126, 34, 0.25)` (使用主色"陶土橙"的 25% 透明度)
-- **Main Border:** `#E67E22` (主色"陶土橙")
-- **Glow Effect:** `#E67E22` (主色"陶土橙")
+- **Fill:** `rgba(240, 134, 58, 0.25)` (使用主色"活力橙"的 25% 透明度)
+- **Main Border:** `#F0863A` (主色"活力橙")
+- **Glow Effect:** `#F0863A` (主色"活力橙")
 
 ---
 

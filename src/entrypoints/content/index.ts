@@ -1,5 +1,6 @@
 import '@/assets/main.css';
 import './style.css';
+import { name } from '~~/package.json';
 import { createVueApp } from './main';
 import * as analytics from '@/utils/analytics';
 
@@ -9,9 +10,9 @@ export default defineContentScript({
 
   async main(ctx) {
     const ui = await createShadowRootUi(ctx, {
-      name: 'layer-craft-ext',
+      name: name,
       position: 'inline',
-      anchor: 'body',
+      anchor: 'html',
       onMount: container => {
         analytics.autoTrack(container);
         return createVueApp(container);
