@@ -32,7 +32,9 @@ const handleHistoryUndo = async (history: HistoryItem) => {
   });
   const activeTab = await getActiveTab();
   if (activeTab) {
-    await sendMessage('makeUndo', history, activeTab.id);
+    // 将代理对象转换为普通对象，避免 Firefox 中的克隆错误
+    const plainHistory = JSON.parse(JSON.stringify(history));
+    await sendMessage('makeUndo', plainHistory, activeTab.id);
     await getProxiedHistoryService().deleteHistoryItem(history.id);
     historyItems.value = historyItems.value.filter(item => item.id !== history.id);
   }

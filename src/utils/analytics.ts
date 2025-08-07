@@ -1,9 +1,17 @@
 import { analytics } from '#analytics';
 
 export const trackEvent = (eventName: string, eventProperties?: Record<string, string>) => {
-  analytics.track(eventName, eventProperties);
+  try {
+    analytics.track(eventName, eventProperties);
+  } catch (error) {
+    console.warn('Analytics tracking failed:', error);
+  }
 };
 
 export const autoTrack = (container: Document | ShadowRoot | Element) => {
-  analytics.autoTrack(container);
+  try {
+    analytics.autoTrack(container);
+  } catch (error) {
+    console.warn('Analytics autoTrack failed:', error);
+  }
 };
