@@ -97,11 +97,39 @@ function applyHistoryItem(history: HistoryItem): boolean {
       
       case 'image_replace':
         const imageElement = getElementByXpath(history.xpath);
-        if (imageElement && imageElement.tagName === 'IMG') {
+        if (!imageElement) break;
+        
+        // 检查元素类型并应用相应的替换逻辑
+        const tagName = imageElement.tagName.toLowerCase();
+        
+        if (tagName === 'img') {
           (imageElement as HTMLImageElement).src = history.after;
-          // 移除预隐藏类，显示元素
           imageElement.classList.remove('layer-craft-pre-hide');
           return true;
+        } else if (tagName === 'picture') {
+          const img = imageElement.querySelector('img');
+          if (img) {
+            img.src = history.after;
+            imageElement.classList.remove('layer-craft-pre-hide');
+            return true;
+          }
+        } else {
+          // 检查是否是背景图片
+          const computedStyle = window.getComputedStyle(imageElement);
+          const backgroundImage = computedStyle.backgroundImage;
+          if (backgroundImage && backgroundImage !== 'none') {
+            imageElement.style.backgroundImage = `url('${history.after}')`;
+            imageElement.classList.remove('layer-craft-pre-hide');
+            return true;
+          }
+          
+          // 检查其他类型的图片
+          const content = computedStyle.content;
+          if (content && content.includes('url')) {
+            imageElement.style.content = `url('${history.after}')`;
+            imageElement.classList.remove('layer-craft-pre-hide');
+            return true;
+          }
         }
         break;
       

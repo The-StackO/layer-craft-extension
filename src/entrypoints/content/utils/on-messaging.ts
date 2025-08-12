@@ -52,10 +52,33 @@ const undoElementDelete = (history: HistoryItem) => {
 };
 
 const undoImageReplace = (history: HistoryItem) => {
-  const { xpath, before, after } = history;
+  const { xpath, before } = history;
 
   const element = getElementByXpath(xpath);
-  if (element) {
+  if (!element) return;
+  
+  // 检查元素类型并应用相应的恢复逻辑
+  const tagName = element.tagName.toLowerCase();
+  
+  if (tagName === 'img') {
     (element as HTMLImageElement).src = before;
+  } else if (tagName === 'picture') {
+    const img = element.querySelector('img');
+    if (img) {
+      img.src = before;
+    }
+  } else {
+    // 检查是否是背景图片
+    const computedStyle = window.getComputedStyle(element);
+    const backgroundImage = computedStyle.backgroundImage;
+    if (backgroundImage && backgroundImage !== 'none') {
+      element.style.backgroundImage = `url('${before}')`;
+    } else {
+      // 检查其他类型的图片
+      const content = computedStyle.content;
+      if (content && content.includes('url')) {
+        element.style.content = `url('${before}')`;
+      }
+    }
   }
 };
