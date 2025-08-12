@@ -3,9 +3,6 @@ import { NConfigProvider } from 'naive-ui';
 import CursorInspector from './components/CursorInspector.vue';
 import LayerPanel from './components/LayerPanel.vue';
 import { onMessage } from '@/services/messging';
-import { getElementByXpath } from '@/utils/dom';
-import { getCurrentLocation } from '@/utils/url';
-import { getProxiedHistoryService } from '@/services/history/proxy';
 import { useNaiveTheme } from '@/composables/useNaiveTheme';
 
 const isInspecting = ref(false);
@@ -25,19 +22,6 @@ const handlePanelClose = () => {
 };
 
 onMounted(() => {
-  getProxiedHistoryService()
-    .getHistoryByUrl(getCurrentLocation())
-    .then(historyItems => {
-      historyItems.reverse().forEach(history => {
-        if (history.type === 'text_replace') {
-          const element = getElementByXpath(history.xpath);
-          if (element) {
-            element.textContent = history.after;
-          }
-        }
-      });
-    });
-
   // 监听选择元素
   onMessage('selection', message => {
     isInspecting.value = message.data.type === 'start';
