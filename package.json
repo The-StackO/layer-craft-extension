@@ -2,7 +2,7 @@
   "name": "layer-craft-extension",
   "description": "layer-craft-extension",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
@@ -28,14 +28,14 @@
     "@tailwindcss/vite": "^4.1.11",
     "@vicons/ionicons5": "^0.13.0",
     "@wxt-dev/analytics": "^0.5.0",
-    "@wxt-dev/auto-icons": "^1.0.2",
+    "@wxt-dev/auto-icons": "^1.1.0",
     "@wxt-dev/i18n": "^0.2.4",
     "@wxt-dev/module-vue": "^1.0.2",
     "naive-ui": "^2.42.0",
     "prettier": "3.6.2",
     "tailwindcss": "^4.1.11",
-    "typescript": "5.6.3",
-    "vue-tsc": "^2.2.10",
-    "wxt": "^0.20.6"
+    "typescript": "5.9.2",
+    "vue-tsc": "^3.0.5",
+    "wxt": "^0.20.8"
   }
 }
