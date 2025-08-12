@@ -5,6 +5,10 @@
  */
 export function getCurrentLocation(): string {
   const { origin, pathname } = window.location;
+  return origin + pathname;
+}
 
+export function getCurrentLocationByUrl(url: string): string {
+  const { origin, pathname } = new URL(url);
   return origin + pathname;
 }

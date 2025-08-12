@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Layer Craft 图片替换测试页面</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    
+    .section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .section h2 {
+      color: #333;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+    
+    .image-container {
+      margin: 15px 0;
+      padding: 15px;
+      border: 1px dashed #ccc;
+      border-radius: 4px;
+    }
+    
+    .bg-image-test {
+      width: 300px;
+      height: 200px;
+      background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop');
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #007bff;
+      border-radius: 8px;
+    }
+    
+    .content-image-test::before {
+      content: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop');
+      display: block;
+      margin: 10px 0;
+    }
+    
+    .styled-div {
+      padding: 20px;
+      margin: 10px 0;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      color: white;
+      border-radius: 8px;
+    }
+    
+    .responsive-image {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .label {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🖼️ Layer Craft 图片替换测试页面</h1>
+  <p>这个页面包含了各种类型的图片元素，用于测试 Layer Craft 扩展的图片替换功能。</p>
+
+  <!-- 1. 普通 IMG 标签 -->
+  <div class="section">
+    <h2>📷 IMG 标签测试</h2>
+    <div class="image-container">
+      <span class="label">IMG标签</span>
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" 
+           alt="风景图片" 
+           style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    </div>
+    
+    <div class="image-container">
+      <span class="label">IMG标签(带样式)</span>
+      <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=350&h=250&fit=crop" 
+           alt="动物图片" 
+           style="border: 3px solid #4ecdc4; border-radius: 12px; padding: 5px;">
+    </div>
+  </div>
+
+  <!-- 2. PICTURE 标签 -->
+  <div class="section">
+    <h2>🖼️ PICTURE 标签测试</h2>
+    <div class="image-container">
+      <span class="label">PICTURE标签</span>
+      <picture>
+        <source media="(min-width: 800px)" srcset="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop">
+        <source media="(min-width: 400px)" srcset="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=400&h=300&fit=crop">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop" 
+             alt="响应式图片" 
+             class="responsive-image">
+      </picture>
+    </div>
+  </div>
+
+  <!-- 3. 背景图片 -->
+  <div class="section">
+    <h2>🎨 背景图片测试</h2>
+    <div class="image-container">
+      <span class="label">背景图片</span>
+      <div class="bg-image-test"></div>
+    </div>
+    
+    <div class="image-container">
+      <span class="label">背景图片(内联样式)</span>
+      <div style="width: 250px; height: 150px; background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=250&h=150&fit=crop'); background-size: cover; border-radius: 8px;"></div>
+    </div>
+  </div>
+
+  <!-- 4. CSS Content 属性图片 -->
+  <div class="section">
+    <h2>⚙️ CSS Content 属性图片测试</h2>
+    <div class="image-container">
+      <span class="label">Content图片</span>
+      <div class="content-image-test">
+        <p>这个 div 的 ::before 伪元素包含了一个通过 content 属性插入的图片。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. 混合内容区域 -->
+  <div class="section">
+    <h2>🔀 混合内容测试</h2>
+    <div class="image-container">
+      <span class="label">混合区域</span>
+      <div class="styled-div">
+        <h3>这是一个包含多种样式的 div</h3>
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=80&fit=crop" 
+             alt="小图标" 
+             style="float: left; margin-right: 15px; border-radius: 4px;">
+        <p>这个 div 包含了背景渐变、文字内容和一个浮动的图片。你可以测试替换其中的任何图片元素。</p>
+        <div style="clear: both;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. 图片画廊 -->
+  <div class="section">
+    <h2>🖼️ 图片画廊</h2>
+    <div class="image-container">
+      <span class="label">图片集合</span>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=150&h=150&fit=crop" alt="图片1" style="border-radius: 8px;">
+        <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=150&h=150&fit=crop" alt="图片2" style="border-radius: 8px;">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop" alt="图片3" style="border-radius: 8px;">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723a9ce6890?w=150&h=150&fit=crop" alt="图片4" style="border-radius: 8px;">
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 特殊用例 -->
+  <div class="section">
+    <h2>🔍 特殊用例测试</h2>
+    <div class="image-container">
+      <span class="label">SVG图片</span>
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=100&fit=crop" 
+           alt="真实图片" 
+           style="border: 2px solid #9b59b6; border-radius: 8px;">
+    </div>
+    
+    <div class="image-container">
+      <span class="label">更多真实图片</span>
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=100&fit=crop"
+           alt="更多真实图片" 
+           style="border: 2px solid #3498db; border-radius: 8px;">
+    </div>
+  </div>
+
+  <!-- 使用说明 -->
+  <div class="section">
+    <h2>📋 使用说明</h2>
+    <ol>
+      <li>启动 Layer Craft 扩展</li>
+      <li>点击"选择元素"按钮</li>
+      <li>将鼠标悬停在任何图片元素上</li>
+      <li>点击选择图片元素</li>
+      <li>在弹出的面板中输入新的图片URL</li>
+      <li>点击确认按钮完成替换</li>
+    </ol>
+    
+    <h3>支持的图片类型：</h3>
+    <ul>
+      <li>✅ IMG 标签图片</li>
+      <li>✅ PICTURE 标签图片</li>
+      <li>✅ CSS 背景图片</li>
+      <li>✅ CSS Content 属性图片</li>
+    </ul>
+  </div>
+
+</body>
+</html>

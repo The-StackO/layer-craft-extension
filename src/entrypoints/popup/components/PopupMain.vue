@@ -6,6 +6,7 @@ import { sendMessage } from '@/services/messging';
 import type { HistoryItem } from '@/services/history/types';
 import { getProxiedHistoryService } from '@/services/history/proxy';
 import { getActiveTab } from '@/utils/tabs';
+import { getCurrentLocationByUrl } from '@/utils/url';
 
 // 操作历史的模拟数据
 const contentScriptInjected = ref(false);
@@ -44,7 +45,9 @@ onMounted(async () => {
   const activeTab = await getActiveTab();
   if (activeTab && activeTab.url) {
     contentScriptInjected.value = await sendMessage('ping', {}, activeTab.id);
-    historyItems.value = await getProxiedHistoryService().getHistoryByUrl(activeTab.url);
+    historyItems.value = await getProxiedHistoryService().getHistoryByUrl(
+      getCurrentLocationByUrl(activeTab.url)
+    );
   }
 });
 </script>
